@@ -5,7 +5,7 @@ export const useDeleteTask = () => {
 
   return useMutation({
     mutationFn: async (id: string) => {
-      await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+      await fetch(`/api/tasks/${id}`, { method: 'DELETE' });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['tasks'] });

@@ -1,7 +1,8 @@
+import React from 'react';
 import { GlobalStyles as MUIGlobalStyles } from '@mui/material';
 
 export function GlobalStyles() {
-  const inputGlobalStyles = (
+  return (
     <MUIGlobalStyles
       styles={{
         '*, *::before, *::after': {
@@ -51,6 +52,4 @@ export function GlobalStyles() {
       }}
     />
   );
-
-  return inputGlobalStyles;
 }

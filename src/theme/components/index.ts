@@ -1,5 +1,4 @@
 import { ThemeOptions } from '@mui/material';
-
 import buttonOverride from './button';
 import popoverOverride from './popover';
 // import checkboxOverride from '@/theme/components/checkbox';
@@ -17,19 +16,7 @@ const components: ThemeOptions['components'] = {
     },
   },
   MuiAlertTitle: {},
-  MuiAppBar: {
-    defaultProps: {
-      color: 'transparent',
-      elevation: 0,
-    },
-    styleOverrides: {
-      root: {
-        borderRadius: 0,
-        boxShadow: 'none',
-        overflow: 'visible',
-      },
-    },
-  },
+  MuiAppBar: {},
   MuiAutocomplete: {
     styleOverrides: {
       paper: ({ theme }) => ({
@@ -191,8 +178,19 @@ const components: ThemeOptions['components'] = {
   MuiCollapse: {},
   MuiContainer: {},
   MuiCssBaseline: {},
-  MuiDialog: {},
-  MuiDialogActions: {},
+  MuiDialog: {
+    defaultProps: {
+      fullWidth: true,
+      maxWidth: 'sm',
+    },
+  },
+  MuiDialogActions: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        padding: theme.spacing(1.5, 3),
+      }),
+    },
+  },
   MuiDialogContent: {},
   MuiDialogContentText: {},
   MuiDialogTitle: {},
@@ -228,7 +226,13 @@ const components: ThemeOptions['components'] = {
     },
   },
   MuiFormControl: {},
-  MuiFormControlLabel: {},
+  MuiFormControlLabel: {
+    styleOverrides: {
+      label: {
+        fontSize: '14px',
+      },
+    },
+  },
   MuiFormGroup: {},
   MuiFormHelperText: {},
   MuiFormLabel: {},
@@ -271,7 +275,13 @@ const components: ThemeOptions['components'] = {
   MuiList: {},
   MuiListItem: {},
   MuiListItemAvatar: {},
-  MuiListItemButton: {},
+  MuiListItemButton: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        borderRadius: theme.spacing(1),
+      }),
+    },
+  },
   MuiListItemIcon: {},
   MuiListItemSecondaryAction: {},
   MuiListItemText: {},
@@ -375,10 +385,17 @@ const components: ThemeOptions['components'] = {
       }),
     },
   },
-  MuiTable: {},
+  MuiTable: {
+    defaultProps: {
+      stickyHeader: true,
+    },
+  },
   MuiTableBody: {},
   MuiTableCell: {
     styleOverrides: {
+      root: ({ theme }) => ({
+        padding: theme.spacing(1.5, 2),
+      }),
       head: ({ theme }) => ({
         color: theme.palette.text.secondary,
         backgroundColor: theme.palette.grey[200],
@@ -416,6 +433,7 @@ const components: ThemeOptions['components'] = {
   MuiTextField: {
     defaultProps: {
       variant: 'outlined',
+      size: 'small',
     },
     styleOverrides: {
       root: ({ theme }) => ({
@@ -436,20 +454,7 @@ const components: ThemeOptions['components'] = {
   },
   MuiToggleButton: {},
   MuiToggleButtonGroup: {},
-  MuiToolbar: {
-    styleOverrides: {
-      root: ({ theme }) => ({
-        backdropFilter: 'blur(6px)',
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
-        minHeight: theme.spacing(8),
-        transition:
-          'all 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-        [theme.breakpoints.up('md')]: {
-          minHeight: theme.spacing(10),
-        },
-      }),
-    },
-  },
+  MuiToolbar: {},
   MuiTooltip: {
     styleOverrides: {
       tooltip: ({ theme }) => ({

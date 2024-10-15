@@ -5,7 +5,7 @@ export const useUpdateTask = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: UpdateTaskSchema & { id: string }) => {
-      await fetch(`/api/todos/${data.id}`, {
+      await fetch(`/api/tasks/${data.id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
       });

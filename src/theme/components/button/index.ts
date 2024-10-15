@@ -3,12 +3,25 @@ import { Components, Theme } from '@mui/material';
 const buttonOverride: Components<Omit<Theme, 'components'>>['MuiButton'] = {
   variants: [
     {
+      props: { variant: 'soft' },
+      style: ({ theme }) => ({
+        color: theme.palette.grey[800],
+        backgroundColor: theme.functions.rgba(theme.palette.grey[800], 0.08),
+        '&:hover': {
+          backgroundColor: theme.functions.rgba(theme.palette.grey[800], 0.16),
+        },
+      }),
+    },
+    {
       props: { color: 'primary', variant: 'soft' },
       style: ({ theme }) => ({
         color: theme.palette.primary.main,
         backgroundColor: theme.functions.rgba(theme.palette.primary.main, 0.08),
         '&:hover': {
-          backgroundColor: theme.functions.rgba(theme.palette.primary.main, 0.16),
+          backgroundColor: theme.functions.rgba(
+            theme.palette.primary.main,
+            0.16
+          ),
         },
       }),
     },
@@ -16,9 +29,15 @@ const buttonOverride: Components<Omit<Theme, 'components'>>['MuiButton'] = {
       props: { color: 'secondary', variant: 'soft' },
       style: ({ theme }) => ({
         color: theme.palette.secondary.main,
-        backgroundColor: theme.functions.rgba(theme.palette.secondary.main, 0.08),
+        backgroundColor: theme.functions.rgba(
+          theme.palette.secondary.main,
+          0.08
+        ),
         '&:hover': {
-          backgroundColor: theme.functions.rgba(theme.palette.secondary.main, 0.16),
+          backgroundColor: theme.functions.rgba(
+            theme.palette.secondary.main,
+            0.16
+          ),
         },
       }),
     },
@@ -28,7 +47,10 @@ const buttonOverride: Components<Omit<Theme, 'components'>>['MuiButton'] = {
         color: theme.palette.success.main,
         backgroundColor: theme.functions.rgba(theme.palette.success.main, 0.08),
         '&:hover': {
-          backgroundColor: theme.functions.rgba(theme.palette.success.main, 0.16),
+          backgroundColor: theme.functions.rgba(
+            theme.palette.success.main,
+            0.16
+          ),
         },
       }),
     },
@@ -38,7 +60,10 @@ const buttonOverride: Components<Omit<Theme, 'components'>>['MuiButton'] = {
         color: theme.palette.warning.main,
         backgroundColor: theme.functions.rgba(theme.palette.warning.main, 0.08),
         '&:hover': {
-          backgroundColor: theme.functions.rgba(theme.palette.warning.main, 0.16),
+          backgroundColor: theme.functions.rgba(
+            theme.palette.warning.main,
+            0.16
+          ),
         },
       }),
     },
@@ -97,6 +122,14 @@ const buttonOverride: Components<Omit<Theme, 'components'>>['MuiButton'] = {
       height: 30,
       padding: theme.spacing(0, 1),
     }),
+    contained: ({ theme }) => ({
+      color: theme.palette.common.white,
+      backgroundColor: theme.palette.grey[800],
+      boxShadow: theme.customShadows.z8,
+      '&:hover': {
+        backgroundColor: theme.palette.grey[700],
+      },
+    }),
     containedInherit: ({ theme }) => ({
       color: theme.palette.common.white,
       backgroundColor: theme.palette.grey[800],
@@ -124,7 +157,10 @@ const buttonOverride: Components<Omit<Theme, 'components'>>['MuiButton'] = {
       boxShadow: theme.customShadows.warning,
     }),
     outlinedInherit: ({ theme }) => ({
-      border: `1px solid ${theme.functions.rgba(theme.palette.grey[800], 0.32)}`,
+      border: `1px solid ${theme.functions.rgba(
+        theme.palette.grey[800],
+        0.32
+      )}`,
       '&:hover': {
         border: `1px solid ${theme.functions.rgba(theme.palette.grey[800], 1)}`,
       },

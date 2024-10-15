@@ -13,6 +13,7 @@ import {
   shadows,
   typography,
 } from './foundations';
+import { SnackbarProvider } from 'notistack';
 
 export const AppThemeProvider = ({ children }: PropsWithChildren) => {
   const theme: Theme = createTheme({
@@ -30,7 +31,12 @@ export const AppThemeProvider = ({ children }: PropsWithChildren) => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <GlobalStyles />
-      {children}
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        {children}
+      </SnackbarProvider>
     </ThemeProvider>
   );
 };

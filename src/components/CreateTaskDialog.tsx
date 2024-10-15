@@ -1,15 +1,15 @@
-import * as React from 'react';
+import { useCreateTask } from '@/hooks/useCreateTask';
+import { CreateTaskSchema } from '@/utils/schema';
+import { LoadingButton } from '@mui/lab';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
-import { CreateTaskSchema } from '@/utils/schema';
-import { LoadingButton } from '@mui/lab';
-import { useCreateTask } from '@/hooks/useCreateTask';
+import { toast } from './toast';
 
 export default function CreateTaskDialog({
   open,
@@ -23,6 +23,7 @@ export default function CreateTaskDialog({
   const onSubmit = async (data: CreateTaskSchema) => {
     try {
       await createTaskMutation.mutateAsync(data);
+      toast('Task created successfully', 'success');
       form.reset();
       handleClose();
     } catch (error) {
@@ -59,7 +60,12 @@ export default function CreateTaskDialog({
         />
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 3 }}>
-        <Button onClick={handleClose} variant="outlined" size="large">
+        <Button
+          onClick={handleClose}
+          variant="soft"
+          size="large"
+          color="inherit"
+        >
           Cancel
         </Button>
         <LoadingButton

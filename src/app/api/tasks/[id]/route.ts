@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import db from '@/utils/database';
+import { TaskModel } from '@/schemas/task.schema';
 import { updateTaskSchema } from '@/utils/schema';
+import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 
 export async function PUT(
@@ -8,7 +8,6 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   const { id } = params;
-  const { title, status } = await request.json();
 
   const isIdValid = z.string().uuid().safeParse(id);
 
@@ -19,26 +18,23 @@ export async function PUT(
     );
   }
 
-  const result = updateTaskSchema.safeParse({ title, status });
+  const data = await request.json();
+
+  const result = updateTaskSchema.safeParse(data);
 
   if (!result.success) {
     return NextResponse.json({ error: result.error.message }, { status: 400 });
   }
 
-  const isExist = await db.todo.findUnique({
-    where: { id: id as string },
-  });
+  const isExist = await TaskModel.get(id);
 
   if (!isExist) {
-    return NextResponse.json({ error: 'Todo not found' }, { status: 404 });
+    return NextResponse.json({ error: 'Task not found' }, { status: 404 });
   }
 
-  const todo = await db.todo.update({
-    where: { id: id as string },
-    data: { title, status },
-  });
+  const task = await TaskModel.update(id, result.data);
 
-  return NextResponse.json(todo);
+  return NextResponse.json(task);
 }
 
 export async function DELETE(
@@ -55,17 +51,13 @@ export async function DELETE(
     );
   }
 
-  const isExist = await db.todo.findUnique({
-    where: { id: id as string },
-  });
+  const isExist = await TaskModel.get(id);
 
   if (!isExist) {
-    return NextResponse.json({ error: 'Todo not found' }, { status: 404 });
+    return NextResponse.json({ error: 'Task not found' }, { status: 404 });
   }
 
-  await db.todo.delete({
-    where: { id: id as string },
-  });
+  await TaskModel.delete(id);
 
-  return NextResponse.json({ message: 'Todo deleted' });
+  return NextResponse.json({ message: 'Task deleted' });
 }

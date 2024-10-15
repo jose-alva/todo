@@ -6,7 +6,7 @@ import {
 } from '@tanstack/react-query';
 
 const createTask = async (task: CreateTaskSchema) => {
-  const response = await fetch('/api/todos', {
+  const response = await fetch('/api/tasks', {
     method: 'POST',
     body: JSON.stringify(task),
   });

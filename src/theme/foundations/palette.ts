@@ -1,5 +1,4 @@
 import { PaletteOptions } from '@mui/material';
-
 import { COLORS } from './colors';
 import { rgba } from './functions';
 
